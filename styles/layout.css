@@ -1,0 +1,196 @@
+/* ============================================================
+   BASE
+   ============================================================ */
+.slidev-layout {
+  font-family: var(--font-body);
+  font-size: var(--typescale-body-size);
+  font-weight: var(--typescale-body-weight);
+  line-height: var(--typescale-body-line);
+  color: var(--fg-default);
+  background-color: var(--bg-default);
+  transition: color var(--speed-f) var(--motion-standard);
+  padding: var(--slide-padding);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.slidev-layout h1 {
+  font-size: var(--typescale-display-size);
+  font-weight: var(--typescale-display-weight);
+  line-height: var(--typescale-display-line);
+  letter-spacing: var(--typescale-display-tracking);
+  color: var(--fg-default);
+}
+
+.slidev-layout h2 {
+  font-size: var(--typescale-headline-size);
+  font-weight: var(--typescale-headline-weight);
+  line-height: var(--typescale-headline-line);
+  letter-spacing: var(--typescale-headline-tracking);
+  color: var(--fg-default);
+}
+
+.slidev-layout h3 {
+  font-size: var(--typescale-title-size);
+  font-weight: var(--typescale-title-weight);
+  line-height: var(--typescale-title-line);
+  color: var(--fg-default);
+}
+
+.slidev-layout p {
+  color: var(--fg-muted);
+}
+
+.slidev-layout strong {
+  font-weight: 700;
+  color: var(--fg-default);
+}
+
+.slidev-layout a {
+  color: var(--fg-primary);
+  text-decoration: none;
+  transition: opacity var(--speed-uf) var(--motion-standard);
+}
+
+.slidev-layout a:hover {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   INLINE CODE
+   ============================================================ */
+.slidev-layout :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--bg-inline-code);
+  color: var(--fg-primary);
+  padding: 0.15em 0.45em;
+  border-radius: var(--shape-sm);
+}
+
+/* ============================================================
+   CODE BLOCKS
+   ============================================================ */
+.slidev-layout pre {
+  border-radius: var(--shape-xl);
+  overflow: hidden;
+  box-shadow: var(--elevation-2);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+.slidev-layout ul,
+.slidev-layout ol {
+  list-style: none;
+  padding-left: 0;
+  color: var(--fg-muted);
+}
+
+.slidev-layout li {
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* unordered — filled square */
+.slidev-layout ul > li::before {
+  content: '';
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  background-color: var(--bg-color-tab-active);
+  border-radius: var(--shape-xs);
+  flex-shrink: 0;
+}
+
+/* ordered — circled counter */
+.slidev-layout ol {
+  counter-reset: ol-counter;
+}
+
+.slidev-layout ol > li {
+  counter-increment: ol-counter;
+}
+
+.slidev-layout ol > li::before {
+  content: counter(ol-counter);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--shape-full);
+  background-color: var(--bg-color-tab-active);
+  color: var(--fg-primary);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ============================================================
+   BLOCKQUOTE
+   ============================================================ */
+.slidev-layout blockquote {
+  border-left: 4px solid var(--fg-secondary);
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--bg-secondary-container);
+  border-radius: 0 var(--shape-lg) var(--shape-lg) 0;
+  color: var(--fg-on-secondary-container);
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.slidev-layout table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: var(--shape-lg);
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+}
+
+.slidev-layout thead tr {
+  background-color: var(--bg-color-tab-active);
+  color: var(--fg-default);
+}
+
+.slidev-layout th {
+  font-size: var(--typescale-label-size);
+  font-weight: var(--typescale-label-weight);
+  letter-spacing: var(--typescale-label-tracking);
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+}
+
+.slidev-layout td {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--outline-color);
+  color: var(--fg-muted);
+}
+
+.slidev-layout tbody tr:nth-child(even) {
+  background-color: var(--bg-surface);
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+.slidev-layout ::selection {
+  background-color: var(--primary);
+  color: var(--fg-button-default);
+}
+
+/* ============================================================
+   COVER + INTRO base grid
+   ============================================================ */
+.slidev-layout.cover,
+.slidev-layout.intro {
+  @apply h-full grid;
+}
