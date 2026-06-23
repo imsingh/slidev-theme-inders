@@ -1,135 +1,204 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+interface Speaker {
+  name: string
+  role?: string
+  avatar?: string
+}
 
-const props = defineProps<{
-  background?: string
-  chip?: string
-  animated?: boolean
+defineProps<{
+  subheading?: string
+  event?: string
+  speakers?: Speaker[]
 }>()
-
-const bgStyle = computed(() => {
-  if (!props.background) return {}
-  const isColor = props.background[0] === '#' || props.background.startsWith('rgb')
-  return isColor
-    ? { background: props.background }
-    : { backgroundImage: `url("${props.background}")`, backgroundSize: 'cover', backgroundPosition: 'center' }
-})
 </script>
 
 <template>
-  <div class="slidev-layout cover" :style="bgStyle">
-    <div v-if="!background" class="cover__gradient" aria-hidden="true">
-      <template v-if="animated">
-        <div class="cover__blob cover__blob--1" />
-        <div class="cover__blob cover__blob--2" />
-        <div class="cover__blob cover__blob--3" />
-      </template>
-    </div>
+  <div class="slidev-layout cover">
+    <div class="cover__body">
 
-    <div class="cover__content">
-      <div v-if="chip" class="cover__chip-wrap">
-        <Chip variant="outline">{{ chip }}</Chip>
+      <!-- event name -->
+      <div v-if="event" class="cover__event">
+        <span class="cover__event-dot" aria-hidden="true" />
+        {{ event }}
       </div>
-      <slot />
+
+      <!-- heading from slot, subheading from prop -->
+      <div class="cover__heading-block">
+        <slot />
+        <p v-if="subheading" class="cover__subheading">{{ subheading }}</p>
+      </div>
+
+      <!-- speakers -->
+      <div v-if="speakers?.length" class="cover__speakers">
+        <div v-for="s in speakers.slice(0, 2)" :key="s.name" class="cover__speaker">
+          <div class="cover__speaker-avatar">
+            <img v-if="s.avatar" :src="s.avatar" :alt="s.name" />
+            <span v-else>{{ s.name.split(' ').map(w => w[0]).slice(0, 2).join('') }}</span>
+          </div>
+          <div class="cover__speaker-info">
+            <span class="cover__speaker-name">{{ s.name }}</span>
+            <span v-if="s.role" class="cover__speaker-role">{{ s.role }}</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="cover__blob" aria-hidden="true" />
+    <!-- decorative accent bar -->
+    <div class="cover__accent" aria-hidden="true" />
   </div>
 </template>
 
 <style scoped>
 .cover {
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  height: 100%;
-  padding: 0;
-  /* theme-locked: always dark, never affected by light/dark switch */
-  background-color: var(--turquoise-1100);
-  color: var(--grey-1500);
-  transition: none;
-}
-
-.cover__gradient {
   position: absolute;
   inset: 0;
-  background: var(--primary-gradient);
-  z-index: 0;
+  padding: var(--space-12) var(--space-12) var(--space-10);
+  background-color: var(--turquoise-1100);
+  color: var(--grey-1500);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
 }
 
-/* aurora blobs — only rendered when animated=true */
-.cover__blob {
+/* subtle gradient wash at bottom-right for depth */
+.cover::before {
+  content: '';
   position: absolute;
-  border-radius: var(--shape-full);
-  filter: blur(48px);
-  opacity: 0.9;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 110% 110%, var(--turquoise-800) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at -10% -10%, var(--maroon-1100) 0%, transparent 55%);
   pointer-events: none;
-  will-change: transform;
 }
 
-.cover__blob--1 {
-  width: 70%;
-  height: 70%;
-  top: -15%;
-  left: -15%;
-  background: radial-gradient(circle, var(--turquoise-600) 0%, transparent 65%);
-  animation: blob-float-1 18s ease-in-out infinite;
-}
-
-.cover__blob--2 {
-  width: 60%;
-  height: 60%;
-  bottom: -20%;
-  right: -10%;
-  background: radial-gradient(circle, var(--maroon-700) 0%, transparent 65%);
-  animation: blob-float-2 22s ease-in-out infinite;
-}
-
-.cover__blob--3 {
-  width: 55%;
-  height: 55%;
-  top: 25%;
-  left: 30%;
-  background: radial-gradient(circle, var(--turquoise-900) 0%, transparent 65%);
-  animation: blob-float-3 26s ease-in-out infinite;
-}
-
-.cover__content {
+.cover__body {
   position: relative;
-  z-index: 2;
-  max-width: 800px;
-  width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-8);
 }
 
-.cover__chip-wrap {
-  margin-bottom: var(--space-6);
+/* ── event ───────────────────────────────────────────────── */
+.cover__event {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--typescale-label-size);
+  font-weight: var(--typescale-label-weight);
+  letter-spacing: var(--typescale-label-tracking);
+  text-transform: uppercase;
+  color: var(--turquoise-400);
+  align-self: flex-start;
 }
 
-/* force chip colours to work on the dark gradient background */
-.cover :deep(.chip--outline) {
-  color: var(--grey-1500);
-  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5);
+.cover__event-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--turquoise-500);
+  flex-shrink: 0;
+}
+
+/* ── heading block ───────────────────────────────────────── */
+.cover__heading-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 820px;
 }
 
 .cover :deep(h1) {
   font-family: var(--font-display);
-  font-size: var(--typescale-display-size);
+  font-size: clamp(40px, 5.5vw, var(--typescale-display-size));
   font-weight: var(--typescale-display-weight);
-  line-height: var(--typescale-display-line);
+  line-height: 1.05;
   letter-spacing: var(--typescale-display-tracking);
+  color: var(--grey-1500);
+  margin: 0;
+}
+
+.cover__subheading {
+  font-family: var(--font-body);
+  font-size: var(--typescale-title-size);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin: var(--space-5) 0 0;
+  line-height: 1.5;
+  max-width: 640px;
+}
+
+/* ── speakers ────────────────────────────────────────────── */
+.cover__speakers {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.cover__speaker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cover__speaker-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--shape-full);
+  background: var(--turquoise-800);
+  border: 2px solid var(--turquoise-600);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
   color: var(--grey-1500);
 }
 
-.cover :deep(h1 + p),
-.cover :deep(p) {
-  color: rgba(255, 255, 255, 0.75);
-  margin-top: var(--space-4);
-  font-size: var(--typescale-title-size);
+.cover__speaker-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.cover :deep(a) {
-  color: var(--turquoise-300);
+.cover__speaker-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cover__speaker-name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--grey-1500);
+  line-height: 1.2;
+}
+
+.cover__speaker-role {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.2;
+}
+
+/* ── accent bar ──────────────────────────────────────────── */
+.cover__accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--turquoise-600) 0%, var(--maroon-700) 60%, transparent 100%);
 }
 </style>

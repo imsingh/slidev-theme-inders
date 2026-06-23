@@ -114,25 +114,16 @@ const socialEntries = computed(() =>
 .intro {
   display: grid;
   grid-template-columns: 2fr 3fr;
-  /* escape any padding Slidev's base layout adds */
   position: absolute;
   inset: 0;
   overflow: hidden;
   padding: 0;
 }
 
-/* ---- LEFT: full-bleed photo ---- */
+/* ---- LEFT: solid color panel ---- */
 .intro__left {
   position: relative;
-  border-radius: var(--shape-xl);
-  margin: var(--space-4);
-  background: linear-gradient(160deg, var(--turquoise-500), var(--maroon-600));
-  padding: 10px;
-}
-
-.intro__left .intro__avatar,
-.intro__left .intro__avatar-fallback {
-  border-radius: calc(var(--shape-xl) - 10px);
+  background-color: var(--turquoise-800);
   overflow: hidden;
 }
 
@@ -142,6 +133,9 @@ const socialEntries = computed(() =>
   object-fit: cover;
   object-position: center top;
   display: block;
+  /* blend photo into the panel color */
+  mix-blend-mode: luminosity;
+  opacity: 0.75;
 }
 
 .intro__avatar-fallback {
@@ -150,21 +144,21 @@ const socialEntries = computed(() =>
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-gradient);
-  color: var(--grey-1500);
+  color: rgba(255, 255, 255, 0.2);
   font-family: var(--font-display);
-  font-size: 80px;
+  font-size: 120px;
   font-weight: 700;
 }
 
-/* ---- RIGHT: speaker info ---- */
+/* ---- RIGHT: plain background ---- */
 .intro__right {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-5);
-  padding: var(--space-12) var(--space-12) var(--space-12) var(--space-8);
+  padding: var(--space-12) var(--space-12) var(--space-12) var(--space-10);
   background-color: var(--bg-default);
+  border-left: 4px solid var(--turquoise-800);
 }
 
 .intro__chips {

@@ -194,3 +194,27 @@
 .slidev-layout.intro {
   @apply h-full grid;
 }
+
+/* ============================================================
+   DARK LAYOUTS — force white text
+   cover and closing are always dark regardless of color schema
+   ============================================================ */
+.slidev-layout.cover,
+.slidev-layout.closing {
+  color: var(--grey-1500);
+}
+
+.slidev-layout.cover h1,
+.slidev-layout.cover h2,
+.slidev-layout.cover h3,
+.slidev-layout.cover p,
+.slidev-layout.cover li,
+.slidev-layout.cover strong,
+.slidev-layout.closing h1,
+.slidev-layout.closing h2,
+.slidev-layout.closing h3,
+.slidev-layout.closing p,
+.slidev-layout.closing li,
+.slidev-layout.closing strong {
+  color: inherit;
+}

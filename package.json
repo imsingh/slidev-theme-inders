@@ -13,7 +13,8 @@
     "build": "slidev build example.md",
     "dev": "slidev example.md --open",
     "export": "slidev export example.md",
-    "screenshot": "slidev export example.md --format png"
+    "screenshot": "slidev export example.md --format png",
+    "dev:demo": "slidev showcase.md --open"
   },
   "dependencies": {
     "@slidev/types": "^52.16.0",
@@ -22,7 +23,8 @@
     "slidev-addon-window-mockup": "^0.3.1"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.16.0"
+    "@slidev/cli": "^52.16.0",
+    "@iconify-json/lucide": "^1.2.44"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {
