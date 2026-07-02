@@ -2,7 +2,10 @@
   <div class="slidev-layout statement">
     <div class="statement__accent" />
     <div class="statement__body">
-      <slot />
+      <div class="statement__content">
+        <slot />
+      </div>
+      <Footer />
     </div>
   </div>
 </template>
@@ -29,9 +32,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: var(--slide-padding);
+  padding-bottom: 0;
+}
+
+.statement__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: var(--space-10) var(--space-16);
 }
 
 .statement__body :deep(h1),

@@ -2,12 +2,23 @@
 import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 
-const { currentPage, total } = useNav()
+const { currentPage, total, slides } = useNav()
 const { $frontmatter } = useSlideContext()
 
 const hidden = computed(() => !!$frontmatter.hideFooter)
-const section = computed(() => $frontmatter.section as string | undefined)
 
+// Use the explicit section on this slide, or walk backwards to find the nearest inherited one.
+const section = computed(() => {
+  if ($frontmatter.section != null)
+    return $frontmatter.section as string
+  for (let i = currentPage.value - 1; i >= 1; i--) {
+    const slide = slides.value[i - 1]
+    const fm = (slide?.meta as any)?.slide?.frontmatter
+    if (fm?.section != null)
+      return fm.section as string
+  }
+  return undefined
+})
 </script>
 
 <template>

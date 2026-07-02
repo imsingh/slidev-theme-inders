@@ -85,4 +85,7 @@ const itemCount = ref(0)
   background: var(--indicator-color, var(--primary)) !important;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--indicator-color, var(--primary)) 16%, transparent) !important;
 }
+.stepper--show-all .stepper-item__body {
+  display: block;
+}
 </style>

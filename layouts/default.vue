@@ -24,6 +24,7 @@ defineProps<{
   flex-direction: column;
   gap: var(--space-6);
   height: 100%;
+  padding-bottom: 0;
   background-color: var(--bg-default);
 }
 
