@@ -507,8 +507,12 @@ Use `<FancyArrow>` from the addon to draw annotated arrows between elements.
 layout: closing
 ---
 
+<script setup>
+import profileImg from './public/profile.webp'
+</script>
+
 <template v-slot:image>
-  <img src="/profile.webp" alt="Indermohan Singh" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
+  <img :src="profileImg" alt="Indermohan Singh" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
 </template>
 
 # Let's connect!
