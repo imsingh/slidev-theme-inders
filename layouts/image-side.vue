@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  image: string
+  src: string
   side?: 'left' | 'right'
   split?: string
   position?: string
@@ -9,7 +9,8 @@ const props = defineProps<{
 
 function gridCols() {
   const [a, b] = (props.split ?? '50/50').split('/').map(Number)
-  return props.side === 'left' ? `${a}fr ${b}fr` : `${b}fr ${a}fr`
+  // order CSS handles visual placement; grid cols always map to [first-order]fr [second-order]fr
+  return `${a}fr ${b}fr`
 }
 </script>
 
@@ -19,7 +20,7 @@ function gridCols() {
       class="image-side__image"
       :class="side === 'right' ? 'image-side__image--right' : ''"
       :style="{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${src})`,
         backgroundPosition: position ?? 'center',
       }"
     />

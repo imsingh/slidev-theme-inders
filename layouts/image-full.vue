@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  image: string
+  src: string
   overlay?: number
   position?: string
 }>()
@@ -10,7 +10,7 @@ const props = defineProps<{
   <div
     class="slidev-layout image-full"
     :style="{
-      backgroundImage: `url(${image})`,
+      backgroundImage: `url(${src})`,
       backgroundPosition: position ?? 'center',
     }"
   >

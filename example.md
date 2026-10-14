@@ -151,7 +151,7 @@ section: "Visual Layouts"
 
 ---
 layout: image-full
-image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1280&q=80"
+src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1280&q=80"
 overlay: 0.6
 section: "Visual Layouts"
 ---
@@ -162,7 +162,7 @@ Every detail matters — from the API surface to the error message.
 
 ---
 layout: image-full
-image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1280&q=80"
+src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1280&q=80"
 overlay: 0.45
 position: "center 30%"
 section: "Visual Layouts"
@@ -174,7 +174,7 @@ Share what you learn. The community grows when you do.
 
 ---
 layout: image-side
-image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80"
+src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80"
 side: right
 split: "55/45"
 heading: Image on the Right
@@ -192,7 +192,7 @@ split: 55/45
 
 ---
 layout: image-side
-image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80"
+src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80"
 side: left
 split: "40/60"
 heading: Image on the Left
