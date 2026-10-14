@@ -176,8 +176,8 @@ onMounted(() => placeHighlight(activeIndex.value, true))
 .agenda__item {
   display: flex;
   align-items: baseline;
-  gap: var(--space-5);
-  padding: var(--space-4) var(--space-5);
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
   border-radius: var(--shape-lg);
   position: relative; /* above the highlight */
   z-index: 1;
@@ -218,7 +218,7 @@ onMounted(() => placeHighlight(activeIndex.value, true))
 
 .agenda__item-title {
   font-family: var(--font-display);
-  font-size: var(--typescale-title-size);
+  font-size: var(--typescale-body-size);
   font-weight: 600;
   color: var(--fg-default);
   line-height: 1.3;
@@ -231,7 +231,7 @@ onMounted(() => placeHighlight(activeIndex.value, true))
 }
 
 .agenda__item-desc {
-  font-size: var(--typescale-body-size);
+  font-size: var(--typescale-label-size);
   color: var(--fg-muted);
   line-height: 1.5;
   transition: opacity 0.3s ease;
