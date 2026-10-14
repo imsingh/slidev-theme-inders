@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useSlideContext } from '@slidev/client'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
+import { useMovingHighlight } from '../composables/useMovingHighlight'
 
 const props = withDefaults(defineProps<{
   heading?: string
@@ -20,42 +21,9 @@ const activeIndex = computed(() => {
   return -1
 })
 
-// ── Moving highlight ──────────────────────────────────────────────────────────
-const listEl = ref<HTMLElement | null>(null)
-const itemEls = ref<HTMLElement[]>([])
-// Use offsetTop/offsetHeight — relative to the positioned parent, stable in Slidev
-const highlightTop = ref(0)
-const highlightH = ref(0)
-const highlightVisible = ref(false)
-const highlightReady = ref(false) // false = skip transition on first placement
-
-async function placeHighlight(index: number, instant = false) {
-  if (!props.animated || index < 0 || index >= props.items.length) {
-    highlightVisible.value = false
-    return
-  }
-  await nextTick()
-  const el = itemEls.value[index]
-  if (!el) return
-
-  if (instant) {
-    // Position without transition, then reveal
-    highlightReady.value = false
-    highlightTop.value = el.offsetTop
-    highlightH.value = el.offsetHeight
-    await nextTick()
-    highlightVisible.value = true
-    // Allow transition only after the initial paint
-    requestAnimationFrame(() => { highlightReady.value = true })
-  } else {
-    highlightTop.value = el.offsetTop
-    highlightH.value = el.offsetHeight
-    highlightVisible.value = true
-  }
-}
-
-watch(activeIndex, idx => placeHighlight(idx, false))
-onMounted(() => placeHighlight(activeIndex.value, true))
+const enabled = computed(() => props.animated)
+const { top: highlightTop, height: highlightH, visible: highlightVisible, ready: highlightReady, itemEls } =
+  useMovingHighlight(activeIndex, enabled)
 </script>
 
 <template>
@@ -65,7 +33,7 @@ onMounted(() => placeHighlight(activeIndex.value, true))
       <div class="agenda__underline" />
     </header>
 
-    <div ref="listEl" class="agenda__list">
+    <div class="agenda__list">
       <!-- animated moving highlight pill -->
       <div
         v-if="animated"
