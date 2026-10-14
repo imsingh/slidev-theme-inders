@@ -150,7 +150,7 @@ defineProps<{
   font-family: var(--font-display);
   font-size: clamp(40px, 5.5vw, var(--typescale-display-size));
   font-weight: var(--typescale-display-weight);
-  line-height: 1.05;
+  line-height: var(--typescale-display-line);
   letter-spacing: var(--typescale-display-tracking);
   color: var(--grey-1500);
   margin: 0;
@@ -218,7 +218,7 @@ defineProps<{
 
 .cover__speaker-role {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: var(--typescale-label-size);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.2;

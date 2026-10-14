@@ -118,7 +118,7 @@ const color = computed(() => {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.85em;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--fg-muted);
   margin-top: 0.3em;
 }

@@ -50,7 +50,7 @@
   font-family: var(--font-display);
   font-weight: var(--typescale-display-weight);
   font-size: clamp(36px, 4.5vw, var(--typescale-display-size));
-  line-height: 1.15;
+  line-height: var(--typescale-display-line);
   margin: 0;
   border: none;
   padding: 0;

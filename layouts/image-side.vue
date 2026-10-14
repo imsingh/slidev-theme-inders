@@ -87,6 +87,7 @@ function gridCols() {
   color: var(--fg-default);
   margin: 0;
   line-height: var(--typescale-headline-line);
+  letter-spacing: var(--typescale-headline-tracking);
 }
 
 .image-side__title-underline {

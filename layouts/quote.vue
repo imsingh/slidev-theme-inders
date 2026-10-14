@@ -64,7 +64,7 @@ defineProps<{
   font-size: clamp(var(--typescale-title-size), 3.5vw, var(--typescale-headline-size));
   font-weight: 500;
   line-height: 1.45;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--typescale-headline-tracking);
   color: var(--fg-default);
   border: none;
   background: none;

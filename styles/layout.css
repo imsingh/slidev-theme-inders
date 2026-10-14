@@ -38,6 +38,7 @@
   line-height: var(--typescale-display-line);
   letter-spacing: var(--typescale-display-tracking);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout h2 {
@@ -46,6 +47,7 @@
   line-height: var(--typescale-headline-line);
   letter-spacing: var(--typescale-headline-tracking);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout h3 {
@@ -53,10 +55,13 @@
   font-weight: var(--typescale-title-weight);
   line-height: var(--typescale-title-line);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout p {
+  line-height: var(--typescale-body-line);
   color: var(--fg-muted);
+  margin: 0;
 }
 
 .slidev-layout strong {

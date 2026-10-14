@@ -209,7 +209,7 @@ const socialEntries = computed(() =>
 
 .intro__bio {
   font-size: var(--typescale-body-size);
-  line-height: 1.65;
+  line-height: var(--typescale-body-line);
   color: var(--fg-muted);
   margin: 0;
   max-width: 480px;
@@ -230,6 +230,7 @@ const socialEntries = computed(() =>
   color: var(--fg-muted);
   font-size: var(--typescale-label-size);
   font-weight: 500;
+  line-height: var(--typescale-label-line);
   text-decoration: none;
   transition: color var(--speed-uf) var(--motion-standard);
   white-space: nowrap;

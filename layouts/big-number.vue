@@ -62,13 +62,13 @@ defineProps<{
   font-size: var(--typescale-headline-size);
   font-weight: 500;
   color: var(--fg-default);
-  line-height: 1.2;
+  line-height: var(--typescale-headline-line);
 }
 
 .big-number__sublabel {
   font-size: var(--typescale-body-size);
   color: var(--fg-muted);
   max-width: 480px;
-  line-height: 1.5;
+  line-height: var(--typescale-body-line);
 }
 </style>

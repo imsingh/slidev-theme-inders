@@ -64,7 +64,7 @@ const props = defineProps<{
   font-weight: var(--typescale-display-weight);
   color: #fff;
   margin: 0 0 var(--space-3);
-  line-height: 1.1;
+  line-height: var(--typescale-display-line);
 }
 
 .image-full :deep(p) {

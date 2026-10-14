@@ -34,7 +34,7 @@ const label    = computed(() => props.title ?? resolved.value.label)
   border-radius: var(--shape-xl);
   overflow: hidden;
   font-size: var(--typescale-body-size);
-  line-height: 1.6;
+  line-height: var(--typescale-body-line);
 }
 
 .callout__header {
