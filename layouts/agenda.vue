@@ -110,6 +110,7 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
 /* list is position:relative so the highlight can be absolutely placed */
 .agenda__list {
   flex: 1;
+  min-height: 0;
   position: relative;
   display: flex;
   flex-direction: column;

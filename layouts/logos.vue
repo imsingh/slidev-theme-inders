@@ -61,6 +61,7 @@ withDefaults(defineProps<{
 
 .logos__grid {
   flex: 1;
+  min-height: 0;
   display: grid;
   align-items: center;
   justify-items: center;

@@ -1,4 +1,17 @@
 /* ============================================================
+   SPATIAL CONSTANTS
+   ============================================================ */
+:root {
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-safe-w: calc(var(--slide-w) - 2 * var(--slide-padding));
+  --slide-safe-h: calc(var(--slide-h) - 2 * var(--slide-padding));
+  --footer-h: 2rem;
+  /* usable body height: safe zone minus footer reserve minus gap */
+  --slide-body-h: calc(var(--slide-safe-h) - var(--footer-h) - var(--space-6));
+}
+
+/* ============================================================
    BASE
    ============================================================ */
 .slidev-layout {
@@ -10,6 +23,10 @@
   background-color: var(--bg-default);
   transition: color var(--speed-f) var(--motion-standard);
   padding: var(--slide-padding);
+  /* isolate each slide's layout context */
+  contain: layout;
+  /* allow flex children to shrink below their content size */
+  min-height: 0;
 }
 
 /* ============================================================

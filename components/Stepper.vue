@@ -38,6 +38,8 @@ const itemCount = ref(0)
   flex-direction: column;
   position: relative;
   padding-left: 1.4em;
+  max-height: var(--slide-body-h);
+  overflow: hidden;
 }
 
 .stepper__loop {

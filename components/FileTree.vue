@@ -50,8 +50,10 @@ function icon(item: TreeItem) {
   background: var(--bg-surface);
   border: 1px solid var(--outline-color);
   border-radius: var(--shape-lg);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: var(--space-3) 0;
+  max-height: var(--slide-body-h);
 }
 
 .file-tree__row {

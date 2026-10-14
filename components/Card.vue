@@ -24,6 +24,8 @@ defineProps<{
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
+  min-width: 0;
   transition:
     background-color var(--speed-f) var(--motion-standard),
     box-shadow var(--speed-f) var(--motion-standard);

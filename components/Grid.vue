@@ -30,5 +30,13 @@ const style = {
 <style scoped>
 .grid-layout {
   display: grid;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* grid children must be able to shrink in both axes */
+.grid-layout > :deep(*) {
+  min-height: 0;
+  min-width: 0;
 }
 </style>

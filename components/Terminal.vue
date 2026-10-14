@@ -73,6 +73,8 @@ withDefaults(defineProps<{
   line-height: 1.7;
   white-space: pre-wrap;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(var(--slide-body-h) * 0.7);
 }
 
 .terminal__body :deep(.cmd)     { color: #7ee787; }

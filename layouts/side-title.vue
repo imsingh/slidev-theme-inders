@@ -61,6 +61,7 @@ defineProps<{ title: string }>()
   /* right/top/bottom: 0 — global --slide-padding handles the outer margin */
   padding: 0 0 var(--space-4) var(--space-6);
   overflow: hidden;
+  min-height: 0;
   color: var(--fg-muted);
   display: flex;
   flex-direction: column;

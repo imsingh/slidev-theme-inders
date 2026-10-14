@@ -53,9 +53,11 @@ defineProps<{
   position: relative;
   z-index: 1;
   height: 100%;
+  min-height: 0;
   max-width: 760px;
   margin: 0 auto;
   text-align: left;
+  overflow: hidden;
 }
 
 .quote__text {
