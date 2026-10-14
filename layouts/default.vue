@@ -47,14 +47,15 @@ defineProps<{
 
 .default__title-underline {
   height: 3px;
-  width: 56px;
+  width: 48px;
+  flex-shrink: 0;
   border-radius: var(--shape-full);
   background: var(--primary-gradient);
 }
 
 .default__content {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   color: var(--fg-muted);
 }
 </style>

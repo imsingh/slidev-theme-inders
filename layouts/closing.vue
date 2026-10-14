@@ -1,9 +1,8 @@
 <template>
   <div class="slidev-layout closing">
-    <!-- left accent panel -->
-    <div class="closing__panel" aria-hidden="true" />
-
-    <!-- right content panel -->
+    <div class="closing__panel">
+      <slot name="image" />
+    </div>
     <div class="closing__right">
       <div class="closing__content">
         <slot />
@@ -28,6 +27,15 @@
 
 .closing__panel {
   background-color: var(--turquoise-800);
+  overflow: hidden;
+}
+
+.closing__panel :deep(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .closing__right {
@@ -52,13 +60,18 @@
 }
 
 .closing__content :deep(p) {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.65);
   margin-top: var(--space-4);
   font-size: var(--typescale-title-size);
 }
 
 .closing__content :deep(a) {
   color: var(--turquoise-300);
+  text-decoration: none;
+}
+
+.closing__content :deep(a:hover) {
+  color: var(--turquoise-200);
 }
 
 .closing__footer {
@@ -67,6 +80,6 @@
   left: var(--space-10);
   right: var(--space-12);
   font-size: 0.85em;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
 }
 </style>

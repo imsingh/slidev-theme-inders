@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@slidev/cli": "^52.16.0",
-    "@iconify-json/lucide": "^1.2.44"
+    "@iconify-json/ph": "^1.2.0"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {
@@ -32,7 +32,8 @@
     "defaults": {
       "fonts": {
         "sans": "Space Grotesk",
-        "mono": "Space Mono"
+        "mono": "Space Mono",
+        "custom": ["Bricolage Grotesque"]
       }
     }
   }

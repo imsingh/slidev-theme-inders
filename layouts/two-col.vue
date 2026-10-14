@@ -82,7 +82,7 @@ const splitRatio = (split?: string) => {
 
 .two-col__left,
 .two-col__right {
-  overflow: auto;
+  overflow: hidden;
   color: var(--fg-muted);
 }
 
