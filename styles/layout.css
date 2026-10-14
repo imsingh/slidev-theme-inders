@@ -100,8 +100,8 @@
 .slidev-layout ul > li::before {
   content: '';
   display: inline-flex;
-  width: 22px;
-  height: 22px;
+  width: var(--space-5);
+  height: var(--space-5);
   background-color: var(--primary);
   border-radius: var(--shape-xs);
   flex-shrink: 0;
@@ -121,8 +121,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: var(--space-5);
+  height: var(--space-5);
   border-radius: var(--shape-full);
   background-color: var(--bg-color-tab-active);
   color: var(--fg-primary);

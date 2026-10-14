@@ -32,7 +32,8 @@ defineProps<{ title: string }>()
   flex-direction: column;
   justify-content: center;
   gap: var(--space-4);
-  padding: var(--space-10) var(--space-8) var(--space-10) var(--space-10);
+  /* left/top/bottom padding: 0 — global --slide-padding already provides the outer margin */
+  padding: 0 var(--space-6) 0 0;
   background: var(--bg-surface);
   border-right: 1px solid var(--outline-color);
 }
@@ -57,7 +58,8 @@ defineProps<{ title: string }>()
 }
 
 .side-title__content {
-  padding: var(--space-10) var(--space-10) var(--space-4);
+  /* right/top/bottom: 0 — global --slide-padding handles the outer margin */
+  padding: 0 0 var(--space-4) var(--space-6);
   overflow: hidden;
   color: var(--fg-muted);
   display: flex;

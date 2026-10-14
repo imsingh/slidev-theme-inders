@@ -93,6 +93,8 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
   font-family: var(--font-display);
   font-size: var(--typescale-headline-size);
   font-weight: var(--typescale-headline-weight);
+  line-height: var(--typescale-headline-line);
+  letter-spacing: var(--typescale-headline-tracking);
   color: var(--fg-default);
   margin: 0;
 }
