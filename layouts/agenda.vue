@@ -87,6 +87,9 @@ onMounted(() => placeHighlight(activeIndex.value, true))
           'agenda__item--done':     activeIndex > i,
           'agenda__item--upcoming': activeIndex >= 0 && activeIndex < i,
         }"
+        :style="!animated && activeIndex === i
+          ? { background: 'color-mix(in srgb, var(--primary) 10%, transparent)' }
+          : {}"
       >
         <div class="agenda__number">{{ String(i + 1).padStart(2, '0') }}</div>
         <div class="agenda__item-body">
@@ -181,10 +184,7 @@ onMounted(() => placeHighlight(activeIndex.value, true))
   transition: opacity 0.3s ease;
 }
 
-/* in static mode, colour the active item directly */
-.agenda__item--active:not(.agenda--animated *) {
-  background: color-mix(in srgb, var(--primary) 10%, transparent);
-}
+/* background is handled by the pill in animated mode, by :style binding in static mode */
 
 .agenda__item--upcoming {
   opacity: 0.35;
