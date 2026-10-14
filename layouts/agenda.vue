@@ -14,10 +14,8 @@ const props = withDefaults(defineProps<{
 
 const { $clicks } = useSlideContext()
 
-// In animated mode, $clicks drives the active item (1-indexed, 0 = none active yet)
-// In static mode, the `current` prop drives it
 const activeIndex = computed(() => {
-  if (props.animated) return $clicks.value - 1   // -1 = no item active, 0 = first item
+  if (props.animated) return $clicks.value - 1
   if (props.current != null) return props.current - 1
   return -1
 })
@@ -25,28 +23,39 @@ const activeIndex = computed(() => {
 // ── Moving highlight ──────────────────────────────────────────────────────────
 const listEl = ref<HTMLElement | null>(null)
 const itemEls = ref<HTMLElement[]>([])
-const highlight = ref({ top: 0, height: 0, visible: false })
+// Use offsetTop/offsetHeight — relative to the positioned parent, stable in Slidev
+const highlightTop = ref(0)
+const highlightH = ref(0)
+const highlightVisible = ref(false)
+const highlightReady = ref(false) // false = skip transition on first placement
 
-async function moveHighlight(index: number) {
+async function placeHighlight(index: number, instant = false) {
   if (!props.animated || index < 0 || index >= props.items.length) {
-    highlight.value.visible = false
+    highlightVisible.value = false
     return
   }
   await nextTick()
-  const parent = listEl.value
   const el = itemEls.value[index]
-  if (!parent || !el) return
-  const parentRect = parent.getBoundingClientRect()
-  const elRect = el.getBoundingClientRect()
-  highlight.value = {
-    top: elRect.top - parentRect.top,
-    height: elRect.height,
-    visible: true,
+  if (!el) return
+
+  if (instant) {
+    // Position without transition, then reveal
+    highlightReady.value = false
+    highlightTop.value = el.offsetTop
+    highlightH.value = el.offsetHeight
+    await nextTick()
+    highlightVisible.value = true
+    // Allow transition only after the initial paint
+    requestAnimationFrame(() => { highlightReady.value = true })
+  } else {
+    highlightTop.value = el.offsetTop
+    highlightH.value = el.offsetHeight
+    highlightVisible.value = true
   }
 }
 
-watch(activeIndex, moveHighlight)
-onMounted(() => moveHighlight(activeIndex.value))
+watch(activeIndex, idx => placeHighlight(idx, false))
+onMounted(() => placeHighlight(activeIndex.value, true))
 </script>
 
 <template>
@@ -61,8 +70,11 @@ onMounted(() => moveHighlight(activeIndex.value))
       <div
         v-if="animated"
         class="agenda__highlight"
-        :class="{ 'agenda__highlight--visible': highlight.visible }"
-        :style="{ top: `${highlight.top}px`, height: `${highlight.height}px` }"
+        :class="{
+          'agenda__highlight--visible': highlightVisible,
+          'agenda__highlight--ready': highlightReady,
+        }"
+        :style="{ top: `${highlightTop}px`, height: `${highlightH}px` }"
       />
 
       <div
@@ -142,10 +154,14 @@ onMounted(() => moveHighlight(activeIndex.value))
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   pointer-events: none;
   opacity: 0;
-  /* transition drives the animation: top slides it, opacity fades it in */
+  /* no transition until ready — prevents jump on first render */
+  will-change: top;
+}
+
+/* only add transition after initial placement */
+.agenda__highlight--ready {
   transition:
-    top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.2s ease;
 }
 
