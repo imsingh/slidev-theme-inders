@@ -24,7 +24,9 @@
   },
   "devDependencies": {
     "@slidev/cli": "^52.16.0",
-    "@iconify-json/ph": "^1.2.0"
+    "@iconify-json/ph": "^1.2.0",
+    "@types/qrcode": "^1.5.5",
+    "qrcode": "^1.5.4"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {

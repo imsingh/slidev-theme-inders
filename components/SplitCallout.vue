@@ -13,21 +13,21 @@ defineProps<{
     <div class="sc-body">
       <template v-if="animate">
         <p v-click class="sc-text">{{ left }}</p>
-        <lucide-move-up-left v-click="1" class="sc-arrow" />
+        <span v-click="1" class="i-ph-arrow-up-left-bold sc-arrow" />
       </template>
       <template v-else>
         <p class="sc-text">{{ left }}</p>
-        <lucide-move-up-left class="sc-arrow" />
+        <span class="i-ph-arrow-up-left-bold sc-arrow" />
       </template>
 
       <div class="sc-centre"><slot /></div>
 
       <template v-if="animate">
-        <lucide-move-up-right v-click="2" class="sc-arrow" />
+        <span v-click="2" class="i-ph-arrow-up-right-bold sc-arrow" />
         <p v-click="2" class="sc-text">{{ right }}</p>
       </template>
       <template v-else>
-        <lucide-move-up-right class="sc-arrow" />
+        <span class="i-ph-arrow-up-right-bold sc-arrow" />
         <p class="sc-text">{{ right }}</p>
       </template>
     </div>
@@ -82,9 +82,10 @@ defineProps<{
 }
 
 .sc-arrow {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.5em;
+  height: 1.5em;
   flex-shrink: 0;
   color: var(--primary);
+  display: inline-block;
 }
 </style>

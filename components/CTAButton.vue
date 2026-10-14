@@ -17,7 +17,7 @@ defineProps({
   >
     <span v-if="$slots.icon" class="cta-button__icon"><slot name="icon" /></span>
     <span>{{ text }}</span>
-    <lucide-arrow-up-right class="cta-button__trailing" />
+    <span class="i-ph-arrow-up-right-bold cta-button__trailing" />
   </a>
 </template>
 
