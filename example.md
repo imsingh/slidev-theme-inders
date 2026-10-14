@@ -239,6 +239,8 @@ Observability gives you the data to **know** — traces, error rates, and latenc
 layout: agenda
 heading: Today's Agenda
 section: "Structured Layouts"
+animated: true
+clicks: 4
 items:
   - title: Foundations
     description: What observability actually means
@@ -248,7 +250,6 @@ items:
     description: Following requests across services
   - title: Alerting
     description: Waking the right person at the right time
-current: 2
 ---
 
 ---
