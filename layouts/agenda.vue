@@ -28,86 +28,51 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
 
 <template>
   <div class="slidev-layout agenda">
-    <header class="agenda__header">
-      <h1 class="agenda__title">{{ heading }}</h1>
-      <div class="agenda__underline" />
-    </header>
+    <SlideLayout>
+      <template #header>
+        <h1 class="slide-heading">{{ heading }}</h1>
+        <div class="slide-heading-bar" />
+      </template>
 
-    <div class="agenda__list">
-      <!-- animated moving highlight pill -->
-      <div
-        v-if="animated"
-        class="agenda__highlight"
-        :class="{
-          'agenda__highlight--visible': highlightVisible,
-          'agenda__highlight--ready': highlightReady,
-        }"
-        :style="{ top: `${highlightTop}px`, height: `${highlightH}px` }"
-      />
+      <div class="agenda__list">
+        <!-- animated moving highlight pill -->
+        <div
+          v-if="animated"
+          class="agenda__highlight"
+          :class="{
+            'agenda__highlight--visible': highlightVisible,
+            'agenda__highlight--ready': highlightReady,
+          }"
+          :style="{ top: `${highlightTop}px`, height: `${highlightH}px` }"
+        />
 
-      <div
-        v-for="(item, i) in items"
-        :key="i"
-        :ref="el => { if (el) itemEls[i] = el as HTMLElement }"
-        class="agenda__item"
-        :class="{
-          'agenda__item--active':   activeIndex === i,
-          'agenda__item--done':     activeIndex > i,
-          'agenda__item--upcoming': activeIndex >= 0 && activeIndex < i,
-        }"
-        :style="!animated && activeIndex === i
-          ? { background: 'color-mix(in srgb, var(--primary) 10%, transparent)' }
-          : {}"
-      >
-        <div class="agenda__number">{{ String(i + 1).padStart(2, '0') }}</div>
-        <div class="agenda__item-body">
-          <div class="agenda__item-title">{{ item.title }}</div>
-          <div v-if="item.description" class="agenda__item-desc">{{ item.description }}</div>
+        <div
+          v-for="(item, i) in items"
+          :key="i"
+          :ref="el => { if (el) itemEls[i] = el as HTMLElement }"
+          class="agenda__item"
+          :class="{
+            'agenda__item--active':   activeIndex === i,
+            'agenda__item--done':     activeIndex > i,
+            'agenda__item--upcoming': activeIndex >= 0 && activeIndex < i,
+          }"
+          :style="!animated && activeIndex === i
+            ? { background: 'color-mix(in srgb, var(--primary) 10%, transparent)' }
+            : {}"
+        >
+          <div class="agenda__number">{{ String(i + 1).padStart(2, '0') }}</div>
+          <div class="agenda__item-body">
+            <div class="agenda__item-title">{{ item.title }}</div>
+            <div v-if="item.description" class="agenda__item-desc">{{ item.description }}</div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <Footer />
+    </SlideLayout>
   </div>
 </template>
 
 <style scoped>
-.agenda {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  height: 100%;
-  background: var(--bg-default);
-  overflow: hidden;
-  padding-bottom: 0;
-}
-
-.agenda__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  flex-shrink: 0;
-}
-
-.agenda__title {
-  font-family: var(--font-display);
-  font-size: var(--typescale-headline-size);
-  font-weight: var(--typescale-headline-weight);
-  line-height: var(--typescale-headline-line);
-  letter-spacing: var(--typescale-headline-tracking);
-  color: var(--fg-default);
-  margin: 0;
-}
-
-.agenda__underline {
-  height: 3px;
-  width: 48px;
-  flex-shrink: 0;
-  border-radius: var(--shape-full);
-  background: var(--primary-gradient);
-}
-
-/* list is position:relative so the highlight can be absolutely placed */
+/* list fills slide-layout__content flex column */
 .agenda__list {
   flex: 1;
   min-height: 0;
@@ -119,7 +84,7 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
   overflow: hidden;
 }
 
-/* ── Moving highlight pill ───────────────────────────────────────────────── */
+/* ── Moving highlight pill ─────────────────────────────────────────────── */
 .agenda__highlight {
   position: absolute;
   left: 0;
@@ -128,11 +93,9 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   pointer-events: none;
   opacity: 0;
-  /* no transition until ready — prevents jump on first render */
   will-change: top;
 }
 
-/* only add transition after initial placement */
 .agenda__highlight--ready {
   transition:
     top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -143,27 +106,20 @@ const { top: highlightTop, height: highlightH, visible: highlightVisible, ready:
   opacity: 1;
 }
 
-/* ── Items ───────────────────────────────────────────────────────────────── */
+/* ── Items ─────────────────────────────────────────────────────────────── */
 .agenda__item {
   display: flex;
   align-items: baseline;
   gap: var(--space-4);
   padding: var(--space-3) var(--space-5);
   border-radius: var(--shape-lg);
-  position: relative; /* above the highlight */
+  position: relative;
   z-index: 1;
   transition: opacity 0.3s ease;
 }
 
-/* background is handled by the pill in animated mode, by :style binding in static mode */
-
-.agenda__item--upcoming {
-  opacity: 0.35;
-}
-
-.agenda__item--done {
-  opacity: 0.5;
-}
+.agenda__item--upcoming { opacity: 0.35; }
+.agenda__item--done     { opacity: 0.5; }
 
 .agenda__number {
   font-family: var(--font-mono);

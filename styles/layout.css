@@ -222,6 +222,29 @@
   color: var(--grey-1500);
 }
 
+/* ============================================================
+   SHARED HEADING PATTERN
+   Used by all content layouts via SlideLayout's #header slot.
+   Eliminates duplicated heading typography across layout files.
+   ============================================================ */
+.slide-heading {
+  font-family: var(--font-display);
+  font-size: var(--typescale-headline-size);
+  font-weight: var(--typescale-headline-weight);
+  line-height: var(--typescale-headline-line);
+  letter-spacing: var(--typescale-headline-tracking);
+  color: var(--fg-default);
+  margin: 0;
+}
+
+.slide-heading-bar {
+  height: 3px;
+  width: 48px;
+  flex-shrink: 0;
+  border-radius: var(--shape-full);
+  background: var(--primary-gradient);
+}
+
 .slidev-layout.cover h1,
 .slidev-layout.cover h2,
 .slidev-layout.cover h3,
