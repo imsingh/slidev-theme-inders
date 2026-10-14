@@ -8,11 +8,11 @@ defineProps({
 <template>
   <div class="hands-on-wrapper">
     <div class="hands-on-badge">
-      <lucide-hand class="hands-on-badge__icon" />
+      <span class="i-ph-hand-bold hands-on-badge__icon" />
       <span class="hands-on-badge__label">Hands-on</span>
       <template v-if="time != null">
         <span class="hands-on-badge__divider" />
-        <lucide-clock class="hands-on-badge__icon" />
+        <span class="i-ph-clock-bold hands-on-badge__icon" />
         <span class="hands-on-badge__label">{{ time }} {{ unit }}</span>
       </template>
     </div>

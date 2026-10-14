@@ -7,54 +7,19 @@ defineProps<{
 
 <template>
   <div class="slidev-layout default">
-    <header v-if="heading" class="default__header">
-      <h1 class="default__title">{{ heading }}</h1>
-      <div class="default__title-underline" />
-    </header>
-    <div class="default__content">
+    <SlideLayout>
+      <template v-if="heading" #header>
+        <h1 class="slide-heading">{{ heading }}</h1>
+        <div class="slide-heading-bar" />
+      </template>
       <slot />
-    </div>
-    <Footer />
+    </SlideLayout>
   </div>
 </template>
 
 <style scoped>
-.default {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  height: 100%;
-  padding-bottom: 0;
-  background-color: var(--bg-default);
-}
-
-.default__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  flex-shrink: 0;
-}
-
-.default__title {
-  font-family: var(--font-display);
-  font-size: var(--typescale-headline-size);
-  font-weight: var(--typescale-headline-weight);
-  line-height: var(--typescale-headline-line);
-  letter-spacing: var(--typescale-headline-tracking);
-  color: var(--fg-default);
-  margin: 0;
-}
-
-.default__title-underline {
-  height: 3px;
-  width: 56px;
-  border-radius: var(--shape-full);
-  background: var(--primary-gradient);
-}
-
-.default__content {
-  flex: 1;
-  overflow-y: auto;
+/* Content text color — only style specific to this layout */
+.default :deep(.slide-layout__content) {
   color: var(--fg-muted);
 }
 </style>

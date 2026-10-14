@@ -1,7 +1,7 @@
 <template>
   <div class="prompt-badge-wrapper">
     <div class="prompt-badge">
-      <lucide-sparkles class="prompt-badge__icon" />
+      <span class="i-ph-sparkle-bold prompt-badge__icon" />
       <span class="prompt-badge__label">Prompt</span>
     </div>
   </div>

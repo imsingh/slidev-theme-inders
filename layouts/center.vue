@@ -33,6 +33,7 @@ defineProps<{
   gap: var(--space-5);
   max-width: 760px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .center__chip {

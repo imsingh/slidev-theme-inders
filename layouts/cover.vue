@@ -14,6 +14,10 @@ defineProps<{
 
 <template>
   <div class="slidev-layout cover">
+    <!-- animated ambient blobs -->
+    <div class="cover__blob cover__blob--1" aria-hidden="true" />
+    <div class="cover__blob cover__blob--2" aria-hidden="true" />
+
     <div class="cover__body">
 
       <!-- event name -->
@@ -62,17 +66,6 @@ defineProps<{
   overflow: hidden;
 }
 
-/* subtle gradient wash at bottom-right for depth */
-.cover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 110% 110%, var(--turquoise-800) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at -10% -10%, var(--maroon-1100) 0%, transparent 55%);
-  pointer-events: none;
-}
-
 .cover__body {
   position: relative;
   z-index: 1;
@@ -81,6 +74,45 @@ defineProps<{
   justify-content: space-between;
   height: 100%;
   gap: var(--space-8);
+}
+
+/* ── animated blobs ──────────────────────────────────────── */
+.cover__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.cover__blob--1 {
+  width: 600px;
+  height: 600px;
+  bottom: -200px;
+  right: -150px;
+  background: radial-gradient(circle, var(--turquoise-700) 0%, transparent 70%);
+  animation: blob-drift-1 18s ease-in-out infinite;
+}
+
+.cover__blob--2 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, var(--maroon-900) 0%, transparent 70%);
+  animation: blob-drift-2 22s ease-in-out infinite;
+}
+
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-40px, 30px) scale(1.05); }
+  66%       { transform: translate(30px, -20px) scale(0.97); }
+}
+
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(30px, 40px) scale(1.08); }
+  70%       { transform: translate(-20px, -30px) scale(0.95); }
 }
 
 /* ── event ───────────────────────────────────────────────── */
@@ -118,7 +150,7 @@ defineProps<{
   font-family: var(--font-display);
   font-size: clamp(40px, 5.5vw, var(--typescale-display-size));
   font-weight: var(--typescale-display-weight);
-  line-height: 1.05;
+  line-height: var(--typescale-display-line);
   letter-spacing: var(--typescale-display-tracking);
   color: var(--grey-1500);
   margin: 0;
@@ -186,7 +218,7 @@ defineProps<{
 
 .cover__speaker-role {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: var(--typescale-label-size);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.2;

@@ -1,4 +1,17 @@
 /* ============================================================
+   SPATIAL CONSTANTS
+   ============================================================ */
+:root {
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-safe-w: calc(var(--slide-w) - 2 * var(--slide-padding));
+  --slide-safe-h: calc(var(--slide-h) - 2 * var(--slide-padding));
+  --footer-h: 2rem;
+  /* usable body height: safe zone minus footer reserve minus gap */
+  --slide-body-h: calc(var(--slide-safe-h) - var(--footer-h) - var(--space-6));
+}
+
+/* ============================================================
    BASE
    ============================================================ */
 .slidev-layout {
@@ -10,6 +23,10 @@
   background-color: var(--bg-default);
   transition: color var(--speed-f) var(--motion-standard);
   padding: var(--slide-padding);
+  /* isolate each slide's layout context */
+  contain: layout;
+  /* allow flex children to shrink below their content size */
+  min-height: 0;
 }
 
 /* ============================================================
@@ -21,6 +38,7 @@
   line-height: var(--typescale-display-line);
   letter-spacing: var(--typescale-display-tracking);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout h2 {
@@ -29,6 +47,7 @@
   line-height: var(--typescale-headline-line);
   letter-spacing: var(--typescale-headline-tracking);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout h3 {
@@ -36,10 +55,13 @@
   font-weight: var(--typescale-title-weight);
   line-height: var(--typescale-title-line);
   color: var(--fg-default);
+  margin: 0;
 }
 
 .slidev-layout p {
+  line-height: var(--typescale-body-line);
   color: var(--fg-muted);
+  margin: 0;
 }
 
 .slidev-layout strong {
@@ -100,8 +122,8 @@
 .slidev-layout ul > li::before {
   content: '';
   display: inline-flex;
-  width: 22px;
-  height: 22px;
+  width: var(--space-5);
+  height: var(--space-5);
   background-color: var(--primary);
   border-radius: var(--shape-xs);
   flex-shrink: 0;
@@ -121,8 +143,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: var(--space-5);
+  height: var(--space-5);
   border-radius: var(--shape-full);
   background-color: var(--bg-color-tab-active);
   color: var(--fg-primary);
@@ -203,6 +225,29 @@
 .slidev-layout.cover,
 .slidev-layout.closing {
   color: var(--grey-1500);
+}
+
+/* ============================================================
+   SHARED HEADING PATTERN
+   Used by all content layouts via SlideLayout's #header slot.
+   Eliminates duplicated heading typography across layout files.
+   ============================================================ */
+.slide-heading {
+  font-family: var(--font-display);
+  font-size: var(--typescale-headline-size);
+  font-weight: var(--typescale-headline-weight);
+  line-height: var(--typescale-headline-line);
+  letter-spacing: var(--typescale-headline-tracking);
+  color: var(--fg-default);
+  margin: 0;
+}
+
+.slide-heading-bar {
+  height: 3px;
+  width: 48px;
+  flex-shrink: 0;
+  border-radius: var(--shape-full);
+  background: var(--primary-gradient);
 }
 
 .slidev-layout.cover h1,

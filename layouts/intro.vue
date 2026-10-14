@@ -22,14 +22,14 @@ const props = defineProps<{
 }>()
 
 const platformMeta: Record<keyof SocialLinks, { icon: string; base: string; prefix?: string }> = {
-  website:   { icon: 'i-carbon:link',           base: 'https://',         prefix: '' },
-  github:    { icon: 'i-carbon:logo-github',    base: 'https://github.com/',      prefix: '' },
-  twitter:   { icon: 'i-carbon:logo-twitter',   base: 'https://x.com/',           prefix: '@' },
-  linkedin:  { icon: 'i-carbon:logo-linkedin',  base: 'https://linkedin.com/in/', prefix: '' },
-  youtube:   { icon: 'i-carbon:logo-youtube',   base: 'https://youtube.com/@',    prefix: '' },
-  instagram: { icon: 'i-carbon:logo-instagram', base: 'https://instagram.com/',   prefix: '@' },
-  bluesky:   { icon: 'i-carbon:at',             base: 'https://bsky.app/profile/', prefix: '' },
-  mastodon:  { icon: 'i-carbon:at',             base: 'https://',                 prefix: '' },
+  website:   { icon: 'i-ph-globe-bold',           base: 'https://',                  prefix: '' },
+  github:    { icon: 'i-ph-github-logo-bold',     base: 'https://github.com/',       prefix: '' },
+  twitter:   { icon: 'i-ph-twitter-logo-bold',    base: 'https://x.com/',            prefix: '@' },
+  linkedin:  { icon: 'i-ph-linkedin-logo-bold',   base: 'https://linkedin.com/in/',  prefix: '' },
+  youtube:   { icon: 'i-ph-youtube-logo-bold',    base: 'https://youtube.com/@',     prefix: '' },
+  instagram: { icon: 'i-ph-instagram-logo-bold',  base: 'https://instagram.com/',    prefix: '@' },
+  bluesky:   { icon: 'i-ph-at-bold',              base: 'https://bsky.app/profile/', prefix: '' },
+  mastodon:  { icon: 'i-ph-at-bold',              base: 'https://',                  prefix: '' },
 }
 
 function resolveUrl(platform: keyof SocialLinks, value: string) {
@@ -120,7 +120,7 @@ const socialEntries = computed(() =>
   padding: 0;
 }
 
-/* ---- LEFT: solid color panel ---- */
+/* ---- LEFT: full-colour photo ---- */
 .intro__left {
   position: relative;
   background-color: var(--turquoise-800);
@@ -133,9 +133,19 @@ const socialEntries = computed(() =>
   object-fit: cover;
   object-position: center top;
   display: block;
-  /* blend photo into the panel color */
-  mix-blend-mode: luminosity;
-  opacity: 0.75;
+}
+
+/* subtle gradient overlay for depth without washing out the photo */
+.intro__left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 60%,
+    var(--turquoise-1100) 100%
+  );
+  pointer-events: none;
 }
 
 .intro__avatar-fallback {
@@ -199,7 +209,7 @@ const socialEntries = computed(() =>
 
 .intro__bio {
   font-size: var(--typescale-body-size);
-  line-height: 1.65;
+  line-height: var(--typescale-body-line);
   color: var(--fg-muted);
   margin: 0;
   max-width: 480px;
@@ -220,6 +230,7 @@ const socialEntries = computed(() =>
   color: var(--fg-muted);
   font-size: var(--typescale-label-size);
   font-weight: 500;
+  line-height: var(--typescale-label-line);
   text-decoration: none;
   transition: color var(--speed-uf) var(--motion-standard);
   white-space: nowrap;

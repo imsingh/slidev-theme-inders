@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import { resolveComponent } from 'vue'
-
 defineProps<{
   items: { icon: string; text: string }[]
   columns?: number
 }>()
-
-function lucide(name: string) {
-  const slug = name.replace(/^lucide:/, '')
-  const pascal = slug.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join('')
-  return resolveComponent(`Lucide${pascal}`)
-}
 </script>
 
 <template>
   <div class="ig-grid" :style="columns ? { gridTemplateColumns: `repeat(${columns}, 1fr)` } : {}">
     <div v-for="item in items" :key="item.icon" class="ig-item">
       <div class="ig-icon-wrap">
-        <component :is="lucide(item.icon)" class="ig-icon" />
+        <span class="ig-icon" :class="item.icon" />
       </div>
       <p class="ig-text" v-html="item.text" />
     </div>

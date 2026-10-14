@@ -61,7 +61,7 @@ defineProps<{
   color: var(--grey-1500);
   font-family: var(--font-body);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--typescale-display-tracking);
 }
 
 .avatar-block__text {

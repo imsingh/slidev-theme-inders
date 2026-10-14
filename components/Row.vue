@@ -32,5 +32,7 @@ const style = {
 .row {
   display: flex;
   flex-direction: row;
+  min-width: 0;
+  min-height: 0;
 }
 </style>

@@ -7,10 +7,10 @@ const props = defineProps<{
 }>()
 
 const meta: Record<string, { icon: string; label: string }> = {
-  note:    { icon: 'i-carbon:information',    label: 'Note'    },
-  tip:     { icon: 'i-carbon:idea',           label: 'Tip'     },
-  caution: { icon: 'i-carbon:warning-alt',    label: 'Caution' },
-  danger:  { icon: 'i-carbon:warning-filled', label: 'Danger'  },
+  note:    { icon: 'i-ph-info-bold',           label: 'Note'    },
+  tip:     { icon: 'i-ph-lightbulb-bold',      label: 'Tip'     },
+  caution: { icon: 'i-ph-warning-bold',        label: 'Caution' },
+  danger:  { icon: 'i-ph-warning-circle-bold', label: 'Danger'  },
 }
 
 const resolved = computed(() => meta[props.type ?? 'note'])
@@ -34,7 +34,7 @@ const label    = computed(() => props.title ?? resolved.value.label)
   border-radius: var(--shape-xl);
   overflow: hidden;
   font-size: var(--typescale-body-size);
-  line-height: 1.6;
+  line-height: var(--typescale-body-line);
 }
 
 .callout__header {
